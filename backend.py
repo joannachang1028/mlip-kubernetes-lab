@@ -68,7 +68,7 @@ def predict_engagement():
         features = pd.DataFrame([user_data])[feature_names]
         
         # TODO: implement prediction of engagement_score using the current_model
-        
+
         return jsonify({
             "engagement_score": engagement_score,
             "features_used": user_data,
@@ -79,6 +79,14 @@ def predict_engagement():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+def _handle_sigusr1(signum, frame):
+    host = socket.gethostname()
+    print(
+        f"preStop signal received (SIGUSR1). Host preparing for shutdown: {host}. "
+        f"Last model training time: {last_training_time}",
+        flush=True,
+    )
+
 def _handle_sigterm(signum, frame):
     try:
         host = socket.gethostname()
@@ -88,6 +96,7 @@ def _handle_sigterm(signum, frame):
     finally:
         sys.exit(0)
 
+signal.signal(signal.SIGUSR1, _handle_sigusr1)
 signal.signal(signal.SIGTERM, _handle_sigterm)
 
 

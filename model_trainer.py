@@ -59,7 +59,7 @@ def train_model():
             'training_time': datetime.now().isoformat()
         }
         
-        joblib.dump(model_info, '/shared-volume/model.joblib') # TODO: replace this
+        joblib.dump(model_info, '/shared-volume/model.joblib')
         
         print(f"[{datetime.now()}] Model trained and saved")
             

@@ -19,7 +19,7 @@ spec:
   schedule: # TODO: implement a cron spec that runs every 1-2 minutes
   concurrencyPolicy: Forbid  # Don't start new job if previous still running
   successfulJobsHistoryLimit: 5         # keep only 5 (keep disk util low)
-  failedJobsHistoryLimit: 1             # keep no more than 5 (keep disk util low)    
+  failedJobsHistoryLimit: 5             # keep no more than 5 (keep disk util low)    
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 600       # delete Job 10 minutes after it finishes
