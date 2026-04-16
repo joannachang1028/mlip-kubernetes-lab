@@ -16,7 +16,7 @@ kind: CronJob
 metadata:
   name: model-trainer-job
 spec:
-  schedule: # TODO: implement a cron spec that runs every 1-2 minutes
+  schedule: "*/1 * * * *" # TODO -> here we change the schedule to every minute
   concurrencyPolicy: Forbid  # Don't start new job if previous still running
   successfulJobsHistoryLimit: 5         # keep only 5 (keep disk util low)
   failedJobsHistoryLimit: 5             # keep no more than 5 (keep disk util low)    
@@ -31,7 +31,7 @@ spec:
           containers:
           - name: model-trainer
             # TODO: Replace <DockerHub-Username> with your Docker Hub username, and use the appropriate image name and tag
-            image: <DockerHub-Username>/<model-training-image-name>:<model-training-image-tag>
+            image: joannachang19901028/model-trainer:1.0.0
             volumeMounts:
             - name: model-volume
               mountPath: /shared-volume
